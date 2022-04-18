@@ -1,4 +1,4 @@
-package Selenium.test;
+package selenium.test;
 
 public class LoginTest {
 }

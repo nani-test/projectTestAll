@@ -1,4 +1,4 @@
-package Selenium.utils;
+package selenium.utils;
 
 public class TestBase {
 }
