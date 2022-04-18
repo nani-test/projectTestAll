@@ -1,15 +1,18 @@
 package restAssured.config.utils;
 
+
 import restAssured.test.dto.ProductDTO;
 import restAssured.test.dto.Rating;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import utilsCommun.DataLoadPro;
 
 import java.util.*;
 import static io.restassured.RestAssured.*;
 
 public class ProductTestUtils {
+
 
     public static Response callApiUtils(String url)
     {
@@ -57,13 +60,15 @@ public class ProductTestUtils {
 
     public static ProductDTO createRequest()
     {
+        DataLoadPro dataLoadPro= new DataLoadPro();
         ProductDTO productDTO= new ProductDTO();
-        productDTO.setCategory("nany category");
-        productDTO.setDescription("test");
-        productDTO.setPrice(234.65);
-        productDTO.setTitle("Test Test");
-        productDTO.setRating(new Rating(56.87,9));
-        productDTO.setImg("path here");
+        productDTO.setCategory("Category "+ Utils.generateRandomString(5));
+        productDTO.setDescription(Utils.generateRandomString(10));
+        productDTO.setPrice(Utils.generateRandomDouble(0,2));
+        productDTO.setTitle("Test "+ Utils.generateRandomString(5));
+        productDTO.setRating(new Rating(Utils.generateRandomDouble(0,1),
+                Utils.generateRandomInteger(0,2)));
+        productDTO.setImg(dataLoadPro.getDriverPath("img"));
 
         return productDTO;
     }
