@@ -13,7 +13,6 @@ import org.testng.Assert;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class ProductTest extends BaseTest {
