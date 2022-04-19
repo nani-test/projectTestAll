@@ -14,7 +14,7 @@ public class DataLoadPro {
     public DataLoadPro()
     {
         try {
-            fileReader= new BufferedReader(new FileReader("./src/main/resources/data.properties"));
+            fileReader= new BufferedReader(new FileReader("/Users/nanyguerrero/IdeaProjects/projectTest/src/main/resources/data.properties"));
             p= new Properties();
             p.load(fileReader);
             fileReader.close();

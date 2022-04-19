@@ -1,5 +1,6 @@
 package restAssured.test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.Test;
@@ -11,9 +12,9 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class ProductTest extends BaseTest {
     private static final Logger logger = LogManager.getLogger(ProductTest.class);
@@ -63,13 +64,54 @@ public class ProductTest extends BaseTest {
         }
     }
 
-    @Test
+    @Test (enabled = false)
     public void createProduct()
     {
         ProductDTO productDTO = ProductTestUtils.callApiCreateProduct("/products").as(ProductDTO.class);
         logger.info("Verify the object was created");
         Assert.assertNotNull(productDTO);
 
+    }
+
+    @Test (enabled = false)
+    public void getProductCategory()
+    {
+       Response response= ProductTestUtils.callApiUtils("/products/categories").then()
+               .statusCode(200)
+               .assertThat()
+               .body("[0]", equalTo("electronics"))
+               .body("[3]", equalTo("women's clothing"))
+                .extract().response();
+        List<String> categories= Collections.singletonList(response.asPrettyString());
+
+    }
+
+    @Test
+    public void getProductCategoryOne() throws IOException, ClassNotFoundException {
+
+        logger.info("Obtaining all the categories");
+        String response = ProductTestUtils.callApiUtils("/products/categories").then()
+                .extract().response().asPrettyString();
+        ObjectMapper objectMapper= new ObjectMapper();
+        List<String> categories= objectMapper.readValue(response,objectMapper
+                .constructType(List.class));
+
+        String cat = categories.get(0);
+        String uriPart1="/products/category/";
+        String uri= uriPart1 + cat.trim();
+        System.out.println("uri = " + uri);
+
+        logger.info("With the category desired verify that in the response the category is present");
+        String productDTO = ProductTestUtils.callApiUtils(uri)
+                .then().statusCode(200).extract().response().asPrettyString();
+
+        List<ProductDTO> productDTO1 = objectMapper.readValue(
+                productDTO, objectMapper.getTypeFactory().constructCollectionType(List.class, ProductDTO.class)
+        );
+        for (int i = 0; i < productDTO1.size() - 1; i++) {
+            System.out.println("productDTO1.get(i).getCategory() = " + productDTO1.get(i).getCategory());
+            Assert.assertEquals(productDTO1.get(i).getCategory(), cat);
+        }
     }
 
 }

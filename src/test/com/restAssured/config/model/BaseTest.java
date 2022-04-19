@@ -7,7 +7,7 @@ import utilsCommun.DataLoadPro;
 
 public class BaseTest {
 
-    DataLoadPro dataLoadPro;
+    DataLoadPro dataLoadPro= new DataLoadPro();
 
     @BeforeTest
     public void setUp()

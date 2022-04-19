@@ -10,7 +10,8 @@ public class ProductDTO {
     private double price;
     private String description;
     private String category;
-    private String img;
+    private String image;
+
 
     public int getId() {
         return id;
@@ -53,20 +54,11 @@ public class ProductDTO {
     }
 
     public String getImg() {
-        return img;
+        return image;
     }
 
     public void setImg(String img) {
-        this.img = img;
+        this.image = img;
     }
 
-    public Rating getRating() {
-        return rating;
-    }
-
-    public void setRating(Rating rating) {
-        this.rating = rating;
-    }
-
-    private Rating rating;
 }

@@ -58,6 +58,7 @@ public class ProductTestUtils {
 
     }
 
+
     public static ProductDTO createRequest()
     {
         DataLoadPro dataLoadPro= new DataLoadPro();
@@ -66,10 +67,19 @@ public class ProductTestUtils {
         productDTO.setDescription(Utils.generateRandomString(10));
         productDTO.setPrice(Utils.generateRandomDouble(0,2));
         productDTO.setTitle("Test "+ Utils.generateRandomString(5));
-        productDTO.setRating(new Rating(Utils.generateRandomDouble(0,1),
-                Utils.generateRandomInteger(0,2)));
         productDTO.setImg(dataLoadPro.getDriverPath("img"));
 
         return productDTO;
+    }
+
+    public static String searchCategory(List<String> category)
+    {
+        DataLoadPro dataLoadPro= new DataLoadPro();
+        for (String s : category) {
+            if (s.equals(dataLoadPro.getDriverPath("category"))) {
+                return s;
+            }
+        }
+        return dataLoadPro.getDriverPath("msg");
     }
 }
