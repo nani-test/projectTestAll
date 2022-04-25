@@ -1,11 +1,13 @@
-package restAssured.config.listeners;
+package selenium.model.testConfig.utils;
 
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import restAssured.config.model.BaseTest;
+import selenium.model.testConfig.TestBase;
+import selenium.pages.BasePage;
 
-public class Listeners extends BaseTest implements ITestListener {
+public class ListenersSelenium extends TestBase implements ITestListener {
+
     @Override
     public void onTestStart(ITestResult result) {
 // TODO Auto-generated method stub
@@ -19,8 +21,15 @@ public class Listeners extends BaseTest implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-// TODO Auto-generated method stub
+        BasePage basePage= new BasePage();
+        try {
+            basePage.takeSnapShot("/Users/nanyguerrero/IdeaProjects/projectTest/src/screenShot"
+            + "/"+ "failTest"+ result.getMethod().getMethodName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("Failure of test cases and its details are : "+ result.getName());
+
     }
 
     @Override

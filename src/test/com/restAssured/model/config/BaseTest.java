@@ -1,4 +1,4 @@
-package restAssured.config.model;
+package restAssured.model.config;
 
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeTest;

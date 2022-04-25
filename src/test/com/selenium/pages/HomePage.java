@@ -7,11 +7,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import selenium.utils.SeleniumUtils;
 
-public class HomePage {
+public class HomePage  extends BasePage{
 
-    WebDriver driver;
 
     @FindBy(xpath = "//div[@class='sc-eCApnc fgdplG']")
     WebElement logoUpgrade;
@@ -45,28 +43,36 @@ public class HomePage {
 
     public Boolean verifyLogoUpgradeIsPresent()
     {
-        WebDriverWait webDriverWait= new WebDriverWait(driver,80);
-       return webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='sc-eCApnc fgdplG']")))
-                .isDisplayed();
+        WebElement logoTest = null;
+        try {
+            WebDriverWait webDriverWait = new WebDriverWait(driver, 80);
+             logoTest= webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='sc-eC fgdplG']")));
+        }
+        catch (Exception e)
+        {
+            e.getMessage();
+            return false;
+        }
+        return logoTest.isDisplayed();
     }
 
     public String verifyLogoPageChildIsPresent() throws InterruptedException {
-        SeleniumUtils.scrollToTheElement(driver,logoFooterPage2);
-        return SeleniumUtils.elementPresentChildPage(logoFooterPage1,driver,logoChildPage1);
+        scrollToTheElement(logoFooterPage1);
+        return elementPresentChildPage(logoFooterPage1,logoChildPage1);
     }
 
     public String verifyLogoPageChildIsPresentTrust()
     {
-        SeleniumUtils.scrollToTheElement(driver,logoFooterPage2);
-        return SeleniumUtils.elementPresentChildPage(logoFooterPage3,driver,logoChildPage2);
+        scrollToTheElement(logoFooterPage2);
+        return elementPresentChildPage(logoFooterPage3,logoChildPage2);
     }
 
     public void clickOnSignInButton() throws Exception {
-        SeleniumUtils.clickOnElement(driver,signInButton);
+        clickOnElement(signInButton);
     }
 
     public String verifySignPageIsDisplayed() throws InterruptedException {
-        SeleniumUtils.fiveSeconds();
+        fiveSeconds();
         String loginHeader = null;
         if(signInPage.isDisplayed())
         {
