@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Practice Test">
+    <test name="Selenium Test">
+        <parameter name="password" value="n123456"/>
+        <groups>
+            <dependencies>
+                <group name="SingInEnter" depends-on="SignIn"/>
+            </dependencies>
+        </groups>
+        <classes>
+            <class name="selenium.test.HomePageTest"/>
+            <class name="selenium.test.LoginPageTest">
+                <methods>
+                    <exclude name= "verifyMessageEmptyPass"/>
+                    <exclude name="verifyNotRegisterUser"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
