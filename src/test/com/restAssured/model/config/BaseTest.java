@@ -13,5 +13,6 @@ public class BaseTest {
     public void setUp()
     {
         RestAssured.baseURI=dataLoadPro.getDriverPath("uri");
+
     }
 }
