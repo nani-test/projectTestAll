@@ -26,7 +26,11 @@ public class AuthToken extends BaseTest {
 
     public static void main(String[] args) {
 
-        System.out.println("args = " + mumberTest("sgfhj543jhsdgfhj98hhhh65"));
+       // System.out.println("args = " + mumberTest("sgfhj543jhsdgfhj98hhhh65"));
+
+        int [] numeros= { 4, 3, 25, 6, 7, 8, 9, 10,7,9,5 };
+
+        System.out.println("numero = " + testExample(numeros));
     }
 
     public static Integer mumberTest (String value)
@@ -51,5 +55,33 @@ public class AuthToken extends BaseTest {
             }
         }
         return numberValue;
+    }
+
+    // find the larger integer succession
+    public static Integer testExample(int[] numeros)
+    {
+        int count=0;
+        int max=0;
+        for (int i = 0; i < numeros.length -1; i++) {
+
+            int value= numeros[i] + 1;
+
+            if (value == numeros[i + 1])
+            {
+                count++ ;
+            }
+            else
+            {
+                if(count > max)
+                {
+                    max=count;
+                }
+                else
+                {
+                    count=0;
+                }
+            }
+        }
+        return  Math.max(max,count);
     }
 }

@@ -1,8 +1,5 @@
 package restAssured.test.booking;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import restAssured.model.config.BaseTest;
