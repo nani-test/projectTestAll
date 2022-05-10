@@ -27,13 +27,12 @@ public class AuthToken extends BaseTest {
     public static void main(String[] args) {
 
        // System.out.println("args = " + mumberTest("sgfhj543jhsdgfhj98hhhh65"));
-
         int [] numeros= { 4, 3, 25, 6, 7, 8, 9, 10,7,9,5 };
-
-        System.out.println("numero = " + testExample(numeros));
+        System.out.println("texto = " + reverseString("RahulShettyAcademy"));
     }
 
-    public static Integer mumberTest (String value)
+    //given a string obtain the number and return the summ
+    public static Integer addNumber (String value)
     {
         StringBuilder aux= new StringBuilder();
         List<String> array= new ArrayList<>();
@@ -63,10 +62,7 @@ public class AuthToken extends BaseTest {
         int count=0;
         int max=0;
         for (int i = 0; i < numeros.length -1; i++) {
-
-            int value= numeros[i] + 1;
-
-            if (value == numeros[i + 1])
+            if (numeros[i] + 1 == numeros[i + 1])
             {
                 count++ ;
             }
@@ -84,4 +80,40 @@ public class AuthToken extends BaseTest {
         }
         return  Math.max(max,count);
     }
+
+    //swap two numbers
+    public static void swapNumbers(int number1, int number2)
+    {
+        System.out.println("before = " + number1);
+        System.out.println("before = " + number2);
+        if(number1!=0 && number2!=0)
+        {
+            number1= number1 + number2;
+            number2= number1- number2;
+            number1= number1- number2;
+        }else
+        {
+            System.out.println("This numbers have value zero ");
+        }
+
+        System.out.println("after = " + number1);
+        System.out.println("after = " + number2);
+    }
+
+    //reverse a string
+    public static String reverseString(String texto)
+    {
+      /*  StringBuilder stringBuffer= new StringBuilder(texto);
+        return String.valueOf(stringBuffer.reverse()); */
+        StringBuilder reverse= new StringBuilder();
+        if(texto.length()!=0)
+        {
+            for (int i = 0; i < texto.length()-1; i++) {
+              //  reverse.append(stringBuffer.charAt(i));
+                reverse.append(texto.charAt((texto.length() -1) - i));
+            }
+        }
+       return reverse.toString();
+    }
+
 }
