@@ -1,60 +1,52 @@
 package selenium.test;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import selenium.pages.HomePage;
-import selenium.pages.SignInPage;
-import selenium.model.testConfig.TestBase;
-import utilsCommun.DataLoadPro;
+import selenium.pages.BasePage;
+import selenium.pages.BookingPageDOM;
 
-public class LoginPageTest extends TestBase {
-    SignInPage signInPage;
-    HomePage homePage;
+
+public class BookingTest extends TestBase {
+    BookingPageDOM bookingPage;
     Logger logger= LogManager.getLogger(LoginPageTest.class);
-    DataLoadPro dataLoadPro= new DataLoadPro();
 
-    @Test (groups = {"SingInEnter"},dependsOnGroups = {"SignIn"},enabled = false)
-    public void verifyMessageEmptyEmail() throws Exception {
-        signInPage= new SignInPage(driver);
-        homePage= new HomePage(driver);
-        logger.info("Selecting sign In button");
-        homePage.clickOnSignInButton();
-        logger.info("Entering only password");
-        signInPage.enterPass(dataLoadPro.getDriverPath("password"));
-        logger.info("Clicking on login button");
-        signInPage.clickOnLoginButton();
-        logger.info("Verifying the error message is displayed");
-        Assert.assertEquals(signInPage.messageValidationUser(),dataLoadPro.getDriverPath("invalidMessageField"));
-    }
+    @Test public void testBookingSearch() {
+        // Open the site
+        BasePage.openSite("https://www.msccrociere.it");
 
-    @Test (enabled = false)
-    public void verifyMessageEmptyPass() throws Exception {
-        signInPage= new SignInPage(driver);
-        homePage= new HomePage(driver);
-        logger.info("Selecting sign In button");
-        homePage.clickOnSignInButton();
-        logger.info("Entering only username");
-        signInPage.enterEmail(dataLoadPro.getDriverPath("username"));
-        logger.info("Clicking on login button");
-        signInPage.clickOnLoginButton();
-        logger.info("Verifying the error message is displayed");
-        Assert.assertEquals(signInPage.messageValidationPas(),dataLoadPro.getDriverPath("invalidMessageField"));
-    }
+        out.println("Starting booking test...");
 
-    @Test (enabled = true)
-    public void verifyNotRegisterUser() throws Exception {
-        signInPage= new SignInPage(driver);
-        homePage= new HomePage(driver);
-        logger.info("Selecting sign In button");
-        homePage.clickOnSignInButton();
-        logger.info("Entering username");
-        signInPage.enterEmail(dataLoadPro.getDriverPath("username"));
-        logger.info("Entering password");
-        signInPage.enterPass(dataLoadPro.getDriverPath("password"));
-        signInPage.clickOnLoginButton();
-        logger.info("Verifying the error message when user is not registered is displayed");
-        Assert.assertEquals(signInPage.messageValidationPasAndUser(),dataLoadPro.getDriverPath("invalidUserNotRegistered"));
-    }
+        out.println("Paso 1 completado");
+        bookingPage.testFYI();
+
+        out.println("Paso 2 completado");
+        bookingPage.selectCruiseCard();
+
+        out.println("Paso 3 completado");
+        bookingPage.selectOffer();
+
+        out.println("Paso 4 completado");
+        bookingPage.selectCabin();
+
+        out.println("Paso 5 completado");
+        bookingPage.selectExperience();
+
+        out.println("Paso 6 completado");
+        bookingPage.selectCabinPosition();
+
+        out.println("Paso 7 completado");
+        bookingPage.selectCabinNumber();
+
+        out.println("Paso 8 completado");
+        bookingPage.passengerRegister();
+
+        out.println("Paso 9 completado");
+        bookingPage.selectSpecialOffers();
+
+        out.println("Paso 10 completado");
+        bookingPage.proceedToCheckout();
+
+        // Validation
+        Assert.assertTrue(driver.getTitle().contains("Results"), "Search was not successful.");
+
 }
